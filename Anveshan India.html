@@ -5,19 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anveshan India</title>
     <link rel="stylesheet" href="css/Anveshan India.css">
+    <style>
+        .explore-container {
+            text-align: center;
+        }
+        .explore-container img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+        .search-bar {
+            margin-top: 20px;
+        }
+        .search-bar input[type="text"] {
+            padding: 10px;
+            width: 200px;
+        }
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .loading-dots {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .loading-dot {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 5px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { background-color: magenta; }
+            50% { background-color: white; }
+            100% { background-color: white; }
+        }
+        .comment-section {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .comment {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .comment-box {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            width: 100%;
+        }
+        .comment-box textarea {
+            width: calc(100% - 22px);
+            border: none;
+            outline: none;
+            resize: none;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .comment-box button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .comment-box button.attach {
+            background-color: #007bff;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1 class="website-style">Anveshan India </h1>
+            <h1 class="website-style">Anveshan India</h1>
             <nav>
                 <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#explore">Explore</a></li>
-                    <li><a href="#community">Community</a></li>
-                    <li><a href="#join">Join Us</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#faqs">FAQs</a></li>
+                    <li><a href="#home" id="home-link">Home</a></li>
+                    <li><a href="#explore" id="explore-link">Explore</a></li>
+                    <li><a href="#community" id="community-link">Community</a></li>
+                    <li><a href="#join" id="join-link">Join Us</a></li>
+                    <li><a href="#about" id="about-link">About</a></li>
+                    <li><a href="#faqs" id="faqs-link">FAQs</a></li>
                 </ul>
             </nav>
         </div>
@@ -46,5 +133,101 @@
             <p>&copy; Join us in Exploring Incredible India!!</p>
         </div>
     </footer>
+
+    <div class="loading-dots" id="loadingDots">
+        <span class="loading-dot"></span>
+        <span class="loading-dot"></span>
+        <span class="loading-dot"></span>
+        <span class="loading-dot"></span>
+    </div>
+
+    <script>
+        document.getElementById("home-link").addEventListener("click", function() {
+            document.getElementById("explore").innerHTML = "";
+            document.getElementById("community").innerHTML = "";
+            document.getElementById("join").innerHTML = "";
+            document.getElementById("about").innerHTML = "";
+            document.getElementById("faqs").innerHTML = "";
+        });
+
+        document.getElementById("explore-link").addEventListener("click", function() {
+            document.getElementById("explore").innerHTML = `
+                <div class="explore-container">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Start your Anveshan Now">
+                        <button onclick="showLoading()">Search</button>
+                    </div>
+                    <img src="map of India.jpg" alt="Map of India">
+                </div>
+            `;
+            document.getElementById("community").innerHTML = "";
+            document.getElementById("join").innerHTML = "";
+            document.getElementById("about").innerHTML = "";
+            document.getElementById("faqs").innerHTML = "";
+        });
+
+        document.getElementById("community-link").addEventListener("click", function() {
+            document.getElementById("community").innerHTML = `
+                <div class="container">
+                    <div class="comment-section">
+                        <h2>Community Comments</h2>
+                        <div class="comment"></div>
+                        <div class="comment"></div>
+                        <div class="comment"></div>
+                    </div>
+                </div>
+            `;
+            document.getElementById("explore").innerHTML = "";
+            document.getElementById("join").innerHTML = "";
+            document.getElementById("about").innerHTML = "";
+            document.getElementById("faqs").innerHTML = "";
+
+            document.getElementById("community").innerHTML += `
+                <div class="container">
+                    <div class="comment-box">
+                        <textarea placeholder="Feel free to drop your user experience!"></textarea>
+                        <button class="attach">Attach</button>
+                        <button>Post publicly</button>
+                    </div>
+                </div>
+            `;
+        });
+
+        document.getElementById("join-link").addEventListener("click", function() {
+            document.getElementById("explore").innerHTML = "";
+            document.getElementById("community").innerHTML = "";
+            document.getElementById("about").innerHTML = "";
+            document.getElementById("faqs").innerHTML = "";
+            document.getElementById("join").innerHTML = "";
+        });
+
+        document.getElementById("about-link").addEventListener("click", function() {
+            document.getElementById("explore").innerHTML = "";
+            document.getElementById("community").innerHTML = "";
+            document.getElementById("join").innerHTML = "";
+            document.getElementById("faqs").innerHTML = "";
+            document.getElementById("about").innerHTML = "";
+        });
+
+        document.getElementById("faqs-link").addEventListener("click", function() {
+            document.getElementById("explore").innerHTML = "";
+            document.getElementById("community").innerHTML = "";
+            document.getElementById("join").innerHTML = "";
+            document.getElementById("about").innerHTML = "";
+            document.getElementById("faqs").innerHTML = "";
+        });
+
+        function showLoading() {
+            document.getElementById("loadingDots").style.display = "inline-block";
+            setTimeout(fillDot, 500, 0);
+        }
+
+        function fillDot(index) {
+            if (index < 4) {
+                document.getElementsByClassName("loading-dot")[index].style.backgroundColor = "magenta";
+                setTimeout(fillDot, 500, index + 1);
+            }
+        }
+    </script>
 </body>
 </html>
